@@ -1,4 +1,4 @@
-import {MemberEntity, createDefaultMemberEntity } from '../model/member';
+import {MemberEntity, createDefaultMemberEntity, MemberEntityDetail, createDefaultMemberEntityDetail } from '../model/member';
 
 class MemberAPI {
 
@@ -10,7 +10,17 @@ class MemberAPI {
     .then((response) => this.checkStatus(response))
     .then((response) => this.parseJSON(response))
     .then((data) => this.resolveMembers(data))
-    }
+  }
+
+  getMemberDetail(loginName: string): Promise<MemberEntityDetail> {
+    const gitHubMemberDetailUrl: string = `https://api.github.com/users/${loginName}`;
+
+    return fetch(gitHubMemberDetailUrl)
+    .then((Response) => this.checkStatus(Response))
+    .then((response) => this.parseJSON(response))
+    .then((data) => this.resolveMemberDetail(data))
+
+  }
 
   private checkStatus(response : Response) : Promise<Response> {
     if (response.status >= 200 && response.status < 300) {
@@ -36,10 +46,28 @@ class MemberAPI {
 
       return member;
     });
-
-
     return Promise.resolve(members);
   }
+
+  private resolveMemberDetail (data: any): Promise<MemberEntityDetail> {
+    const member = data.map((gitHubMemberDetail) => {
+      var member: MemberEntityDetail = createDefaultMemberEntityDetail();
+
+      member.id = gitHubMemberDetail.id;
+      member.login = gitHubMemberDetail.login;
+      member.avatar_url = gitHubMemberDetail.avatar_url;
+      member.url = gitHubMemberDetail.url;
+      member.type = gitHubMemberDetail.type;
+      member.name = gitHubMemberDetail.name;
+      member.company = gitHubMemberDetail.company;
+      member.public_repos = gitHubMemberDetail.public_repos;
+
+      return member;
+    });
+
+    return Promise.resolve(member);
+  }
+
 }
 
 export const memberAPI = new MemberAPI();

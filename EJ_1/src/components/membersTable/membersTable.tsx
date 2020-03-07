@@ -47,16 +47,12 @@ export const MembersTableComponent = (props: Props) => {
         </CardContent>
       </Card>
       <table className="table">
-        {/* <thead>
-          <MemberHead />
-        </thead> */}
-        {/* <tbody> */}
+        <tbody>
           {members.map((member: MemberEntity) => (
             <MemberRow key={member.id} member={member} />
           ))}
-        {/* </tbody> */}
+        </tbody>
       </table>
-
     </>
   );
 };

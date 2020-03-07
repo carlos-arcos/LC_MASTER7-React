@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-import {MemberEntity} from '../../model/member';
+import { useHistory } from 'react-router-dom';
+import { MemberEntity } from '../../model/member';
 
 const useStyles = makeStyles({
   card: {
@@ -26,8 +25,9 @@ const useStyles = makeStyles({
   },
 });
 
-export const MemberRow = (props: {member : MemberEntity}) => {
+export const MemberRow = (props: { member: MemberEntity }) => {
   const classes = useStyles(props);
+  const history = useHistory();
 
   return (
     <tr>
@@ -37,11 +37,16 @@ export const MemberRow = (props: {member : MemberEntity}) => {
             <Typography className={classes.title} color="textSecondary" gutterBottom>
               {props.member.login}
             </Typography>
-            <img src={props.member.avatar_url} style ={{maxWidth: '10rem'}}/>
+            <img src={props.member.avatar_url} style={{ maxWidth: '10rem' }} />
           </CardContent>
           <CardActions>
-            <Button size="small" color="primary">Detail ({props.member.id})</Button>
-        </CardActions>
+            <Button
+              size="small" color="primary"
+              onClick={() => history.push(`detailmember/${props.member.login}`)}
+            >
+              Detail ({props.member.id})
+            </Button>
+          </CardActions>
         </Card>
       </td>
     </tr>
