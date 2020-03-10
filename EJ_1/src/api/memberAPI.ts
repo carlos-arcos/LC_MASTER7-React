@@ -19,7 +19,6 @@ class MemberAPI {
     .then((Response) => this.checkStatus(Response))
     .then((response) => this.parseJSON(response))
     .then((data) => this.resolveMemberDetail(data))
-
   }
 
   private checkStatus(response : Response) : Promise<Response> {
@@ -50,24 +49,19 @@ class MemberAPI {
   }
 
   private resolveMemberDetail (data: any): Promise<MemberEntityDetail> {
-    const member = data.map((gitHubMemberDetail) => {
       var member: MemberEntityDetail = createDefaultMemberEntityDetail();
 
-      member.id = gitHubMemberDetail.id;
-      member.login = gitHubMemberDetail.login;
-      member.avatar_url = gitHubMemberDetail.avatar_url;
-      member.url = gitHubMemberDetail.url;
-      member.type = gitHubMemberDetail.type;
-      member.name = gitHubMemberDetail.name;
-      member.company = gitHubMemberDetail.company;
-      member.public_repos = gitHubMemberDetail.public_repos;
-
-      return member;
-    });
+      member.id = data.id;
+      member.login = data.login;
+      member.avatar_url = data.avatar_url;
+      member.url = data.url;
+      member.type = data.type;
+      member.name = data.name;
+      member.company = data.company;
+      member.public_repos = data.public_repos;
 
     return Promise.resolve(member);
   }
-
 }
 
 export const memberAPI = new MemberAPI();
