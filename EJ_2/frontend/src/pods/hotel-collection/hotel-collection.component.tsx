@@ -15,9 +15,7 @@ interface Props {
   hotelCollection: HotelEntityVm[];
 }
 
-export const HotelCollectionComponent: React.FunctionComponent<
-  Props
-> = props => {
+export const HotelCollectionComponent: React.FunctionComponent<Props> = props => {
   const { hotelCollection } = props;
   const classes = useStyles(props);
 

@@ -1,6 +1,0 @@
-para hacer japo, el que está aquí:
-
-G:\Master_Lemon_Code\MASTER_7\6.- API REST\Sesion3\00-boilerplate
-
-- también se puede japonear, aunque de algún error el que está en /solucion
-  de aquí se puede pillar el diseño y del otro, tal vez, la implementación

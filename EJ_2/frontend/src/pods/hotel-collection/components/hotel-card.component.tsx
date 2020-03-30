@@ -69,7 +69,8 @@ export const HotelCard: React.FunctionComponent<Props> = props => {
         </div>
       </CardContent>
       <CardActions>
-        <IconButton aria-label="Add to favorites" onClick={handleNavigate}>
+        <IconButton aria-label="Add to favorites" 
+          onClick={handleNavigate}>
           <EditIcon />
         </IconButton>
         <IconButton aria-label="Share">
